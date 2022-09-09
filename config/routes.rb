@@ -1,10 +1,27 @@
 Rails.application.routes.draw do
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
-  sessions: "admin/sessions"
-}
+  sessions: "admin/sessions"}
   devise_for :users, skip: [:passwords],  controllers: {
   registrations: "user/registrations",
   sessions: 'user/sessions'}
+
+  namespace :user do
+    resources :favorites, only: [:index, :show, :edit, :update, :create, :new, :destroy]
+    resources :sent_comments, only: [:index, :show, :edit, :update, :create, :new]
+    resources :resived_comments, only: [:index, :show, :edit, :update, :create, :new]
+    resources :youtes, only: [:index, :show, :edit, :update, :create, :new]
+  end
+
+
+  namespace :admin do
+    resources :genres, only: [:index, :edit, :update, :create, :new]
+    resources :reports, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :comments, only: [:index, :show, :edit, :update]
+    resources :youtes, only: [:index, :show, :edit, :update]
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end

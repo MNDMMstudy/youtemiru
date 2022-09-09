@@ -1,0 +1,2 @@
+class YouteGenre < ApplicationRecord
+end

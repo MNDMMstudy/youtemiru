@@ -1,0 +1,2 @@
+class Youte < ApplicationRecord
+end
