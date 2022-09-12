@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'homes/top'
+  end
+  root :to =>"home#top"
+  get "/about"=>"home#about"
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"}
   devise_for :users, skip: [:passwords],  controllers: {
@@ -15,12 +21,16 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
+    get '/' => "homes#top"
     resources :genres, only: [:index, :edit, :update, :create, :new]
     resources :reports, only: [:index, :show, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
     resources :comments, only: [:index, :show, :edit, :update]
     resources :youtes, only: [:index, :show, :edit, :update]
   end
+
+  post '/guests/guest_sign_in', to: 'user/guests#new_guest'
+  post '/guests/guest_admin_sign_in', to: 'admin/guests#new_guest'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
