@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
   end
 
   create_table "user_statuses", force: :cascade do |t|
-    t.integer "status", null: false
+    t.string "status", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.integer "user_status_id"
+    t.integer "user_status_id", default: 1
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
