@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Youteジャンルタグ新規登録</h2>
+  <div class="row">
+    <div class="col-10">
+      <table>
+        <td>
+          <%= form_with model: @youte_genre, url: admin_genre_youtes_path do |f| %>
+            <%= f.text_field :genre_name, placeholder:"Youteジャンル名" %>
+            <input type="submit" name="commit" value="新規登録" class="btn btn-success" data-disable-with="新規登録">
+          <% end %>
+        </td>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+      <table>
+        <thead>
+          <tr>
+            <th>Youteジャンルコメント一覧</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @youte_genres.each do |genre| %>
+           <tr>
+            <td><%= genre.genre_name %></td>
+            <td>
+              <%= link_to edit_admin_genre_youte_path(genre.id) do %>
+               <div class="btn btn-sm btn-success">編集する</div>
+              <% end %>
+            </td>
+           </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
