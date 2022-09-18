@@ -1,6 +1,6 @@
 
 <div class="col-10">
-  <h2>みんなのYoute一覧</h2>
+<h2>みんなのYoute一覧</h2>
 <table class="table table-hover table-inverse mt-5">
   <thead>
     <tr>
@@ -15,8 +15,13 @@
   <tbody>
   <% @youtes.each do |youte| %>
    <tr>
-    <td><%= youte.youte_text %></td>
-    <td><%= youte.created_on %></td>
+    <td>
+      <%=  link_to user_youte_path(youte.id) do %>
+        <%= youte.text %>
+      <% end %>
+    </td>
+    <td><%= youte.created_at.strftime("%x") %></td>
+    <td><%= youte.genre_id %></td>
    </tr>
   <% end %>
   </tbody>

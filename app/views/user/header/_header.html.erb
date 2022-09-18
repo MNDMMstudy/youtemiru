@@ -19,14 +19,14 @@
             <% end %>
           </li>
           <li>
-            <%=  link_to user_youtes_path,class: 'nav-link text-light' do %>
+            <%=  link_to user_mypage_index_path,class: 'nav-link text-light' do %>
               <i class="fas fa-gifts"></i> マイページ
             <% end %>
           </li>
           <li>
-            <%=  link_to user_favorites_path,class: 'nav-link text-light' do %>
+            <%#=  link_to user_favorites_path,class: 'nav-link text-light' do %>
               <i class="fas fa-gifts"></i> お気に入り一覧
-            <% end %>
+            <%# end %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>

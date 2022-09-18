@@ -25,25 +25,25 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
   end
 
   create_table "comment_genres", force: :cascade do |t|
-    t.string "genre_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "comment_genre_id", null: false
+    t.integer "genre_id", null: false
     t.integer "youte_id", null: false
     t.boolean "report", default: false, null: false
     t.boolean "indicate", default: true, null: false
-    t.text "comment_text"
+    t.text "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "youte_id", null: false
+    t.integer "comment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -69,17 +69,17 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
   end
 
   create_table "youte_genres", force: :cascade do |t|
-    t.string "genre_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "youtes", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "youte_genre_id", null: false
+    t.integer "genre_id", null: false
     t.boolean "report", default: true, null: false
     t.boolean "indicate", default: true, null: false
-    t.text "youte_text", null: false
+    t.text "text", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

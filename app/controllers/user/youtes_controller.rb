@@ -12,20 +12,25 @@ class User::YoutesController < ApplicationController
 
   def create
     @youte = Youte.new(youte_params)
+    @youte.user_id = current_user.id
     @user =current_user
     #@youte.user_id = current_user.id
     @youtes =Youte.all
     if @youte.save
      flash[:notice] = "Youteの投稿が完了しました"
-     redirect_to user_youte_index_path(@item.id)
+     #redirect_to user_youte_index_path(@youte.id)
+     redirect_to user_youtes_path
     else
      render :index
     end
-  end 
+  end
 
   def show
     @youte =Youte.find(params[:id])
-    @user =current_user
+    
+    @user = current_user
+    @comment = Comment.new
+    @comments = Comment.all
   end
 
   def edit
@@ -44,7 +49,7 @@ class User::YoutesController < ApplicationController
 
 private
   def youte_params
-    params.require(:youte).permit(:user_id, :youte_genre_id, :report, :indicate, :youte_text)
+    params.require(:youte).permit(:user_id, :genre_id, :report, :indicate, :text)
   end
 
 end

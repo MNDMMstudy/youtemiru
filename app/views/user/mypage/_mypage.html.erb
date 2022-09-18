@@ -1,0 +1,18 @@
+<%= form_with model: youte do |f| %>
+    
+    <div class="form-group">
+      <label for="book_title">Title</label>
+      <%= f.text_field :youte_text %>
+    </div>
+
+      <div class="form-group form-inline">
+        <label class="col-4 col-form-label">ジャンル</label>
+          <% f.text_field :youte_genre_id, class:"form-control" %>
+            <%= f.select :youte_genre_id, options_from_collection_for_select(YouteGenre.all, :id, :genre_name_was), include_blank: "--選択してください--" %>
+      </div>
+      <%= f.hidden_field :user_id, :value => user.id %>
+    
+     <label class="col-4 mx-auto d-block"><%= f.submit 'Youte!!', class:"btn btn-success" %></label>
+
+    
+  <% end %>

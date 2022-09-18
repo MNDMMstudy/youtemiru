@@ -34,6 +34,6 @@ class Admin::GenreYoutesController < ApplicationController
 
     private
   def youte_genre_params
-    params.require(:youte_genre).permit(:genre_name)
+    params.require(:youte_genre).permit(:name)
   end
 end

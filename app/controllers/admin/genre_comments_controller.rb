@@ -34,6 +34,6 @@ class Admin::GenreCommentsController < ApplicationController
 
    private
   def comment_genre_params
-    params.require(:comment_genre).permit(:genre_name)
+    params.require(:comment_genre).permit(:name)
   end
 end

@@ -6,7 +6,7 @@
         <td>Commentジャンル名<td>
         <td>
           <%= form_with model:  @comment_genre, url: admin_genre_comment_path do |f| %>
-            <%= f.text_field :genre_name %>
+            <%= f.text_field :name %>
             <input type="submit" name="commit" value="変更を保存" class="btn btn-success" data-disable-with="Update Genre">
           <% end %>
         </td>
