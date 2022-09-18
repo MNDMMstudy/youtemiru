@@ -1,6 +1,6 @@
 class User::YoutesController < ApplicationController
   def index
-    @youtes =Youte.all
+    @youtes =Youte.all.order(created_at: :DESC)
     @youte =Youte.new
     @user =current_user
   end
@@ -27,7 +27,6 @@ class User::YoutesController < ApplicationController
 
   def show
     @youte =Youte.find(params[:id])
-    
     @user = current_user
     @comment = Comment.new
     @comments = Comment.all
@@ -39,12 +38,8 @@ class User::YoutesController < ApplicationController
 
   def update
     @youte = Youte.find(params[:id])
-    if @youte.update(youte_params)
-     flash[:notice] = "You have updated book successfully."
-     redirect_to user_youte_path(@youte.id)
-    else
-     render :edit
-    end
+    @youte.update(indicate: false)
+    redirect_to user_youte_path(@youte)
   end
 
 private

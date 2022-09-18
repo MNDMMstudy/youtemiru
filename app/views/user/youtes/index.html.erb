@@ -1,28 +1,29 @@
 
 <div class="col-10">
 <h2>みんなのYoute一覧</h2>
+<p>※最新順に並んでいます</p>
 <table class="table table-hover table-inverse mt-5">
   <thead>
     <tr>
       <th>みんなのYoute</th>
       <th>投稿日時</th>
-      <th></th>
       <th>タグ</th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
   <% @youtes.each do |youte| %>
-   <tr>
-    <td>
-      <%=  link_to user_youte_path(youte.id) do %>
-        <%= youte.text %>
-      <% end %>
-    </td>
-    <td><%= youte.created_at.strftime("%x") %></td>
-    <td><%= youte.genre_id %></td>
-   </tr>
+    <% if youte.indicate == true %>
+     <tr>
+      <td>
+        <%=  link_to user_youte_path(youte.id) do %>
+          <%= youte.text.truncate(10) %>
+        <% end %>
+      </td>
+      <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
+      <td><%= youte.youte_genre.name %></td>
+     </tr>
+     <% end %>
   <% end %>
   </tbody>
 
