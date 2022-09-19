@@ -13,8 +13,6 @@ Rails.application.routes.draw do
   sessions: 'user/sessions'}
 
   namespace :user do
-
-
     resources :resived_comments, only: [:index, :show, :edit, :update, :create, :new]
     resources :youtes, only: [:index, :show, :edit, :update, :create, :new] do
        resources :sent_comments, only: [:index, :show, :edit, :update, :create, :new]do
@@ -22,6 +20,7 @@ Rails.application.routes.draw do
        end
     end
     resources :mypage, only: [:index, :edit, :update]
+    resources :user_info, only: [:edit, :update]
   end
 
 

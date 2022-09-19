@@ -1,10 +1,33 @@
-<%= form_with model: @youte, url:user_youtes_path do |f| %>
-      <label >Youte!</label>
-      <%= f.text_field :text %>
-      <label>ジャンル</label>
-      <% f.text_field :genre_id, class:"form-control" %>
-      <%= f.select :genre_id, options_from_collection_for_select(YouteGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
-
-     <label class="col-4 mx-auto d-block"><%= f.submit 'Youte!!', class:"btn btn-success" %></label>
-
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+     <%= render "mypage", youte: @youte, user: @user %>
+    </div>
+    <div class="col-7">
+      <table class="table table-hover table-inverse mt-5">
+        <thead>
+          <tr>
+            <th>わたしのYoute</th>
+            <th>投稿日時</th>
+            <th>タグ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @youtes.each do |youte| %>
+            <% if youte.indicate == true %>
+             <tr>
+              <td>
+                <%=  link_to user_youte_path(youte.id) do %>
+                  <%= youte.text.truncate(10) %>
+                <% end %>
+              </td>
+              <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= youte.youte_genre.name %></td>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+       </table>
+    </div>
+  </div>
+</div>

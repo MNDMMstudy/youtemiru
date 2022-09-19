@@ -1,59 +1,67 @@
-<% if @youte.indicate == true %>
- <h2>Youte!</h2>
- <p><%= @youte.text %></p>
-
- <h2>タグ</h2>
- <%= @youte.youte_genre.name %>
-
-  <% if @youte.user == current_user %>
-   <%= link_to "削除", user_youte_path(@youte), method: :patch %>
-  <% end %>
-
- <h2>コメント</h2>
-
-
- <div>
-   <p>コメント件数：<%= @youte.comments.where(indicate:true).count %></p>
-   <% @youte.comments.each do |comment| %>
-    <div>
-     <% if comment.indicate == true %>
-      <%= comment.text %></br>
-      <%= comment.comment_genre.name %></br>
-      <%= comment.created_at.strftime('%Y/%m/%d') %></br>
-       <% if comment.favorited_by?(current_user) %>
-        <p>
-        <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :delete do %>
-         ♥<%= comment.favorites.count %> いいね
-        <% end %>
-        </p>
-       <% else %>
-         <p>
-          <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :post do %>
-           ♡<%= comment.favorites.count %> いいね
-          <% end %>
-         </p>
-       <% end %>
-       <% if comment.user == current_user %>
-        <%= link_to "削除", user_youte_sent_comment_path(comment.youte, comment), method: :patch %>
-       <% end %>
-     <% end %>
-
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+     <%= render "user/mypage/mypage", youte: @youte %>
     </div>
-   <% end %>
- </div>
+    <div class="col-7">
+     <% if @youtes.indicate == true %>
+      <div class="youte">
+       <h2>Youte!</h2>
+       <p><%= @youtes.text %></p>
 
- <div>
-       <%= form_with  url: user_youte_sent_comments_path(@youte) do |f| %>
-             <label >Comment</label>
-             <%= f.text_field :text %>
-             <label>ジャンル</label>
-             <% f.text_field :genre_id, class:"form-control" %>
-             <%= f.select :genre_id, options_from_collection_for_select(CommentGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
+       <h2>タグ</h2>
+       <p><%= @youtes.youte_genre.name %></p>
 
-             <label class="col-4 mx-auto d-block"><%= f.submit 'コメントする', class:"btn btn-success" %></label>
-
+        <% if @youtes.user == current_user %>
+         <%= link_to "削除", user_youte_path(@youtes), method: :patch %>
         <% end %>
+      </div>
+
+      <div class="comment">
+       <h2>コメント</h2>
+       <div class="comment_show">
+         <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
+         <% @youtes.comments.each do |comment| %>
+          <div>
+           <% if comment.indicate == true %>
+            <%= comment.text %></br>
+            <%= comment.comment_genre.name %></br>
+            <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+             <% if comment.favorited_by?(current_user) %>
+              <p>
+              <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :delete do %>
+               ♥<%= comment.favorites.count %> いいね
+              <% end %>
+              </p>
+             <% else %>
+               <p>
+                <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :post do %>
+                 ♡<%= comment.favorites.count %> いいね
+                <% end %>
+               </p>
+             <% end %>
+             <% if comment.user == current_user %>
+              <%= link_to "削除", user_youte_sent_comment_path(comment.youte, comment), method: :patch %>
+             <% end %>
+           <% end %>
+          </div>
+         <% end %>
+       </div>
+
+       <div class="comment_create">
+        <%= form_with  url: user_youte_sent_comments_path(@youtes) do |f| %>
+         <label >Comment</label>
+         <%= f.text_field :text %>
+         <label>ジャンル</label>
+         <% f.text_field :genre_id, class:"form-control" %>
+         <%= f.select :genre_id, options_from_collection_for_select(CommentGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
+         <label class="col-4 mx-auto d-block"><%= f.submit 'コメントする', class:"btn btn-success" %></label>
+        <% end %>
+       </div>
+      </div>
+     <% else %>
+      <h2>このYouteは削除されました。</h2>
+     <% end %>
+    </div>
+   </div>
   </div>
-<% else %>
- <h2>このYouteは削除されました。</h2>
-<% end %>

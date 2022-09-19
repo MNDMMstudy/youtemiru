@@ -1,6 +1,6 @@
 class User::MypageController < ApplicationController
   def index
-    @youtes = Youte.all
+    @youtes = Youte.where(user_id: current_user.id).order(created_at: :DESC)
     @youte = Youte.new
     @user = current_user
 

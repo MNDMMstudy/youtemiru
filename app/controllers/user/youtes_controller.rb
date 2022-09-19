@@ -26,7 +26,7 @@ class User::YoutesController < ApplicationController
   end
 
   def show
-    @youte =Youte.find(params[:id])
+    @youtes =Youte.find(params[:id])
     @user = current_user
     @comment = Comment.new
     @comments = Comment.all
