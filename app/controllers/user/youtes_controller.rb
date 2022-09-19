@@ -2,7 +2,7 @@ class User::YoutesController < ApplicationController
   def index
     @youtes =Youte.all.order(created_at: :DESC)
     @youte =Youte.new
-    @user =current_user
+    @user = current_user
   end
 
   def new

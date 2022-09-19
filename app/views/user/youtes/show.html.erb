@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-5">
-     <%= render "user/mypage/mypage", youte: @youte %>
+     <%= render "user/mypage/mypage", youte: @youte, user: @user %>
     </div>
     <div class="col-7">
      <% if @youtes.indicate == true %>
@@ -30,13 +30,13 @@
              <% if comment.favorited_by?(current_user) %>
               <p>
               <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :delete do %>
-               ♥<%= comment.favorites.count %> いいね
+               ★お気に入り済
               <% end %>
               </p>
              <% else %>
                <p>
                 <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :post do %>
-                 ♡<%= comment.favorites.count %> いいね
+                 ☆お気に入りする
                 <% end %>
                </p>
              <% end %>

@@ -19,7 +19,9 @@ Rails.application.routes.draw do
          resource :favorites, only: [:index, :show, :edit, :update, :create, :new, :destroy]
        end
     end
-    resources :mypage, only: [:index, :edit, :update]
+    resources :mypage, only: [:index, :edit, :update] do
+      resources :my_favorites, only: [:index]
+    end
     resources :user_info, only: [:edit, :update]
   end
 
