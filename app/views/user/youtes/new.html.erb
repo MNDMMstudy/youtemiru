@@ -4,7 +4,6 @@
       <label>ジャンル</label>
       <% f.text_field :genre_id, class:"form-control" %>
       <%= f.select :genre_id, options_from_collection_for_select(YouteGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
-      <%= f.hidden_field :user_id, :value => @user.id %>
 
      <label class="col-4 mx-auto d-block"><%= f.submit 'Youte!!', class:"btn btn-success" %></label>
 

@@ -48,17 +48,11 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_statuses", force: :cascade do |t|
-    t.string "status", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.integer "user_status_id", default: 1
+    t.integer "status", default: 1, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -75,13 +69,17 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
   end
 
   create_table "youtes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "genre_id", null: false
+    t.integer "user_id"
+    t.integer "youte_genre_id"
     t.boolean "report", default: true, null: false
     t.boolean "indicate", default: true, null: false
     t.text "text", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_youtes_on_user_id"
+    t.index ["youte_genre_id"], name: "index_youtes_on_youte_genre_id"
   end
 
+  add_foreign_key "youtes", "users"
+  add_foreign_key "youtes", "youte_genres"
 end

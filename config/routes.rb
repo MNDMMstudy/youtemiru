@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :user do
+    
+  end
   namespace :admin do
     get 'homes/top'
   end
@@ -21,8 +24,11 @@ Rails.application.routes.draw do
     end
     resources :mypage, only: [:index, :edit, :update] do
       resources :my_favorites, only: [:index]
+      resources :comments, only: [:index]
     end
     resources :user_info, only: [:edit, :update]
+    get '/search', to: 'seaches#search'
+    get '/genre', to: 'genres#genre'
   end
 
 

@@ -44,7 +44,7 @@ class User::YoutesController < ApplicationController
 
 private
   def youte_params
-    params.require(:youte).permit(:user_id, :genre_id, :report, :indicate, :text)
+    params.require(:youte).permit(:user_id, :youte_genre_id, :report, :indicate, :text)
   end
 
 end

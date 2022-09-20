@@ -10,8 +10,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## Add name
       t.string :name
 
-      ##Add user_status_id
-      t.integer :user_status_id, default: "1"
+      ##Add status
+      t.integer :status, null: false, default: 1
+      # 0: ログイン出来ない, 1:ログインも投稿も出来る , 2:ログインはできる投稿はできない
 
       ## Recoverable
       t.string   :reset_password_token

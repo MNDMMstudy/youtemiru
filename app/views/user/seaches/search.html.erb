@@ -4,14 +4,11 @@
      <%= render "user/mypage/mypage", youte: @youte, user: @user %>
     </div>
     <div class="col-7">
-      <h2>みんなのYoute一覧</h2>
-      <p>※最新順に並んでいます</p>
-      <%= render 'user/search' %>
-      <%= render 'user/genres/search_genre' %>
+      <h2>検索結果一覧</h2>
       <table class="table table-hover table-inverse mt-5">
         <thead>
           <tr>
-            <th>みんなのYoute</th>
+            <th>一致するYoute</th>
             <th>投稿日時</th>
             <th>タグ</th>
           </tr>

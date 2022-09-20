@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+     <%= render "user/mypage/mypage", youte: @youte, user: @user %>
+    </div>
+    <div class="col-7">
+      <h2>検索結果一覧</h2>
+      <table class="table table-hover table-inverse mt-5">
+        <thead>
+          <tr>
+            <th>一致するYoute</th>
+            <th>投稿日時</th>
+            <th>タグ</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @youtes.each do |youte| %>
+            <% if youte.indicate == true %>
+             <tr>
+              <td>
+                <%= link_to user_youte_path(id: youte.id) do %>
+                  <%= youte.text.truncate(10) %>
+                <% end %>
+              </td>
+              <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= youte.youte_genre.name %></td>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
