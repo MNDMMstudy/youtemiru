@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
   end
 
   create_table "youtes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "youte_genre_id"
-    t.boolean "report", default: true, null: false
+    t.integer "user_id", null: false
+    t.integer "youte_genre_id", null: false
+    t.boolean "report", default: false, null: false
     t.boolean "indicate", default: true, null: false
     t.text "text", null: false
     t.datetime "created_at", precision: 6, null: false

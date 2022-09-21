@@ -3,8 +3,8 @@ class CreateYoutes < ActiveRecord::Migration[6.1]
     create_table :youtes do |t|
       t.references :user, foreign_key: true, null: false
       t.references :youte_genre, foreign_key: true, null: false
-      t.boolean :report, null: false, default: "folse"
-      t.boolean :indicate, null: false, default: "true"
+      t.boolean :report, null: false, default: false
+      t.boolean :indicate, null: false, default: true
       t.text :text, null: false
 
       t.timestamps

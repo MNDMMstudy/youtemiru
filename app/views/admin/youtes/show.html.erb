@@ -1,2 +1,52 @@
-<h1>Admin::Youtes#show</h1>
-<p>Find me in app/views/admin/youtes/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-7">
+      <div class="youte">
+       <h2>Youte!</h2>
+       <p><%= @youtes.text %></p>
+       <h2>タグ</h2>
+       <p><%= @youtes.youte_genre.name %></p>
+       <h2>通報</h2>
+       <% if @youtes.report == true %>
+        <p>通報</p>
+       <% else %>
+        <p>通報されてない</p>
+      <% end %>
+       <h2>表示</h2>
+      <% if @youtes.indicate == true %>
+        <p>表示中</p>
+      <% else %>
+        <p>非表示中</p>
+      <% end %>
+      <%= link_to "削除", admin_youte_path(@youtes), method: :patch %>
+    </div>
+
+      <div class="comment">
+       <h2>コメント</h2>
+       <div class="comment_show">
+         <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
+         <% @youtes.comments.each do |comment| %>
+          <div>
+            <%= comment.text %></br>
+            <%= comment.comment_genre.name %></br>
+            <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+            <h2>通報</h2>
+             <% if comment.report == true %>
+              <p>通報</p>
+             <% else %>
+              <p>通報されてない</p>
+            <% end %>
+             <h2>表示</h2>
+            <% if comment.indicate == true %>
+              <p>表示中</p>
+            <% else %>
+              <p>非表示中</p>
+            <% end %>
+            <%= link_to "削除", admin_comment_path(comment), method: :patch %>
+          </div>
+         <% end %>
+       </div>
+      </div>
+    </div>
+   </div>
+  </div>

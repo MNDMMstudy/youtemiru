@@ -1,2 +1,31 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-7">
+      <div class="user_info">
+       <h2>ユーザー詳細</h2>
+       <h2>ユーザーネーム</h2>
+       <p><%= @user.name %></p>
+       <h2>メールアドレス</h2>
+       <p><%= @user.email %></p>
+       <h2>通報数</h2>
+        <p>Youte!:</p><%= @user.youtes.where(report:true).count %>
+        <p>コメント:</p><%= @user.comments.where(report:true).count %>
+       <h2>ユーザーステータス</h2>
+       <% if @user.status == 0 %>
+          <p>退職済み</p>
+        <% elsif @user.status == 1 %>
+          <p>制限なし</p>
+        <% else %>
+          <p>制限中</p>
+        <% end %>
+       <div class="change_status">
+         <%= form_with model: @user, url:admin_user_path do |f| %>
+          <label>ステータス変更</label>
+            <%= f.select :status, [["退職済み", "0"], ["制限なし", "1"], ["制限中", "2"]], include_blank: "--選択してください--" %>
+          <label class="col-4 mx-auto d-block"><%= f.submit '変更', class:"btn btn-success" %></label>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

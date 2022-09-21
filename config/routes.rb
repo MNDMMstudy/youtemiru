@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :user do
-    
+
   end
   namespace :admin do
     get 'homes/top'
@@ -18,17 +18,20 @@ Rails.application.routes.draw do
   namespace :user do
     resources :resived_comments, only: [:index, :show, :edit, :update, :create, :new]
     resources :youtes, only: [:index, :show, :edit, :update, :create, :new] do
+       get 'reports/check'
+       patch 'reports/update'
        resources :sent_comments, only: [:index, :show, :edit, :update, :create, :new]do
          resource :favorites, only: [:index, :show, :edit, :update, :create, :new, :destroy]
        end
     end
-    resources :mypage, only: [:index, :edit, :update] do
-      resources :my_favorites, only: [:index]
-      resources :comments, only: [:index]
-    end
+    resources :mypage, only: [:index, :edit, :update]
+    resources :my_favorites, only: [:index]
+    resources :comments, only: [:index]
+
     resources :user_info, only: [:edit, :update]
     get '/search', to: 'seaches#search'
     get '/genre', to: 'genres#genre'
+
   end
 
 
@@ -41,6 +44,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :comments, only: [:index, :show, :edit, :update]
     resources :youtes, only: [:index, :show, :edit, :update]
+    get '/search', to: 'seaches#search'
+    get '/genre', to: 'genres#genre'
   end
 
   post '/guests/guest_sign_in', to: 'user/guests#new_guest'

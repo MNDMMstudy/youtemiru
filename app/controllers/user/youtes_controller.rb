@@ -39,7 +39,10 @@ class User::YoutesController < ApplicationController
   def update
     @youte = Youte.find(params[:id])
     @youte.update(indicate: false)
-    redirect_to user_youte_path(@youte)
+    redirect_to admin_user_path(user.id)
+  end
+  
+  def report
   end
 
 private
