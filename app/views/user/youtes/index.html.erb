@@ -20,7 +20,7 @@
         <tbody>
         <% @youtes.each do |youte| %>
           <% if youte.indicate == true %>
-           <tr>
+           <tr onclick='window.location="<%= user_youte_path(youte.id) %>"' role="link">
             <td>
               <%=  link_to user_youte_path(youte.id) do %>
                 <%= youte.text.truncate(10) %>

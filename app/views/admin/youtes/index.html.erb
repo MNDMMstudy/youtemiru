@@ -18,7 +18,7 @@
 
         <tbody>
         <% @youtes.each do |youte| %>
-         <tr>
+         <tr onclick='window.location="<%= admin_youte_path(youte.id) %>"' role="link">
           <td>
             <%=  link_to admin_youte_path(youte.id) do %>
               <%= youte.text.truncate(10) %>

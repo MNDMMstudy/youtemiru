@@ -15,9 +15,9 @@
         <tbody>
           <% @favorites.each do |favorite| %>
             <% if favorite.comment.indicate == true %>
-             <tr>
+             <tr onclick='window.location="<%= user_youte_path(id: favorite.comment.youte_id) %>"' role="link">
               <td>
-                <%=  link_to  user_youte_path(id: favorite.comment.youte_id) do %>
+                <%=  link_to user_youte_path(id: favorite.comment.youte_id) do %>
                   <%= favorite.comment.text.truncate(10) %>
                 <% end %>
               </td>

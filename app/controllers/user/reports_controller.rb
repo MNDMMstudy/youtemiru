@@ -1,11 +1,11 @@
 class User::ReportsController < ApplicationController
   def check
-    @youte = Youte.find(params[:id])
+    @youte = Youte.find(params[:youte_id])
   end
 
   def update
-    @youte = Youte.find(params[:id])
-    @youte.update(report: false)
+    @youte = Youte.find(params[:youte_id])
+    @youte.update(report: true)
     redirect_to  user_youtes_path
   end
 
