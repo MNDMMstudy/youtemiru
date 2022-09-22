@@ -11,20 +11,20 @@
 
        <h2>タグ</h2>
        <p><%= @youtes.youte_genre.name %></p>
-
+      <h2>緊急度</h2>
       <div id="star-rate<%= @youtes.id%>"> </td>
-          <script>
-            $('#star-rate<%= @youtes.id %>').empty();
-            $('#star-rate<%= @youtes.id%>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              half      : false,
-              readOnly: true,
-              score: <%= @youtes.star %>,
-            });
-          </script>
-          </div>
+       <script>
+         $('#star-rate<%= @youtes.id %>').empty();
+         $('#star-rate<%= @youtes.id%>').raty({
+           size      : 36,
+           starOff   : '<%= asset_path('star-off.png') %>',
+           starOn    : '<%= asset_path('star-on.png') %>',
+           half      : false,
+           readOnly: true,
+           score: <%= @youtes.star.presence || 0 %>,
+         });
+       </script>
+      </div>
 
         <% if @youtes.user == current_user %>
          <%= link_to "削除", user_youte_path(@youtes), method: :patch %>
