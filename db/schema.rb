@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
     t.boolean "report", default: false, null: false
     t.boolean "indicate", default: true, null: false
     t.text "text"
+    t.string "star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
     t.boolean "report", default: false, null: false
     t.boolean "indicate", default: true, null: false
     t.text "text", null: false
+    t.string "star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_youtes_on_user_id"

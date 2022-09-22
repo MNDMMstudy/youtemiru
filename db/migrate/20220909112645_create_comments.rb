@@ -7,6 +7,7 @@ class CreateComments < ActiveRecord::Migration[6.1]
       t.boolean :report, null: false, default: "false"
       t.boolean :indicate, null: false, default: "true"
       t.text :text
+      t.string :star
 
       t.timestamps
     end

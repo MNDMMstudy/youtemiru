@@ -6,4 +6,6 @@ class Youte < ApplicationRecord
   def self.looks(word)
     @youte = Youte.where("text LIKE?","%#{word}%")
   end
+
+
 end

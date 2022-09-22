@@ -4,8 +4,23 @@
       <%= f.text_field :text %></br>
     <label>ジャンル</label>
       <%= f.select :youte_genre_id, options_from_collection_for_select(YouteGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
+      <div class="form-group row" id="star">
+    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
+    <%= f.hidden_field :star, id: :review_star %>
+　　　　</div>
+  <script>
+　　　　$('#star').empty();
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+ 　 　　　scoreName: 'youte[star]',
+    half: false,
+  });
+  </script>
     <label class="col-4 mx-auto d-block"><%= f.submit 'Youte!!', class:"btn btn-success" %></label>
   <% end %>
+
 </div>
 
  <div class="user_edit">
@@ -17,4 +32,5 @@
        名前を変更
       </div>
      <% end %>
+
  </div>

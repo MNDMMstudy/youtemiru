@@ -6,6 +6,7 @@ class CreateYoutes < ActiveRecord::Migration[6.1]
       t.boolean :report, null: false, default: false
       t.boolean :indicate, null: false, default: true
       t.text :text, null: false
+       t.string :star
 
       t.timestamps
     end

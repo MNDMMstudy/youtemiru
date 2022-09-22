@@ -6,7 +6,7 @@ class User::ReportsController < ApplicationController
   def update
     @youte = Youte.find(params[:youte_id])
     @youte.update(report: true)
-    redirect_to  user_youtes_path
+    redirect_to  user_youte_path(@youte)
   end
 
   private

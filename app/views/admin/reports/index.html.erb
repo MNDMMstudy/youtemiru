@@ -1,2 +1,100 @@
-<h1>Admin::Reports#index</h1>
-<p>Find me in app/views/admin/reports/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h2>通報されたYoute・コメント</h2>
+    <p>※通報された順</p>
+    <div class="col-7">
+      <h2>Youte一覧</h2>
+       <table class="table table-hover table-inverse mt-5">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>Youte</th>
+            <th>投稿日時</th>
+            <th>タグ</th>
+            <th>通報</th>
+            <th>表示</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <%  @youtes.each do |youte| %>
+         <tr>
+           <td>
+            <%=  link_to admin_user_path(youte.user.id) do %>
+              <%= youte.user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%=  link_to admin_youte_path(youte.id) do %>
+              <%= youte.text.truncate(10) %>
+            <% end %>
+          </td>
+          <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= youte.youte_genre.name %></td>
+          <td>
+            <% if youte.report == true %>
+              <p>通報</p>
+            <% else %>
+              <p>通報されてない</p>
+            <% end %>
+          </td>
+          <td>
+            <% if youte.indicate == true %>
+              <p>表示中</p>
+            <% else %>
+              <p>非表示中</p>
+            <% end %>
+          </td>
+         </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <h2>コメント一覧</h2>
+      <table class="table table-hover table-inverse mt-5">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>コメント</th>
+            <th>投稿日時</th>
+            <th>タグ</th>
+            <th>通報</th>
+            <th>表示</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <%  @comments.each do |comment| %>
+         <tr>
+           <td>
+            <%=  link_to admin_user_path(comment.user.id) do %>
+              <%= comment.user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%=  link_to admin_youte_path(comment.youte.id) do %>
+              <%= comment.text.truncate(10) %>
+            <% end %>
+          </td>
+          <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= comment.comment_genre.name %></td>
+          <td>
+            <% if comment.report == true %>
+              <p>通報</p>
+            <% else %>
+              <p>通報されてない</p>
+            <% end %>
+          </td>
+          <td>
+            <% if comment.indicate == true %>
+              <p>表示中</p>
+            <% else %>
+              <p>非表示中</p>
+            <% end %>
+          </td>
+         </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

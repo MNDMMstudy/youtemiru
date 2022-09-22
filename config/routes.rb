@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :user do
-
-  end
   namespace :admin do
     get 'homes/top'
   end
@@ -21,6 +18,8 @@ Rails.application.routes.draw do
        get 'reports/check'
        patch 'reports/update'
        resources :sent_comments, only: [:index, :show, :edit, :update, :create, :new]do
+         get 'report_comments/check'
+         patch 'report_comments/update'
          resource :favorites, only: [:index, :show, :edit, :update, :create, :new, :destroy]
        end
     end

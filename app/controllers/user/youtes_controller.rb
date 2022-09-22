@@ -27,6 +27,7 @@ class User::YoutesController < ApplicationController
 
   def show
     @youtes =Youte.find(params[:id])
+    @youte = Youte.new
     @user = current_user
     @comment = Comment.new
     @comments = Comment.all
@@ -41,13 +42,13 @@ class User::YoutesController < ApplicationController
     @youte.update(indicate: false)
     redirect_to admin_user_path(user.id)
   end
-  
+
   def report
   end
 
 private
   def youte_params
-    params.require(:youte).permit(:user_id, :youte_genre_id, :report, :indicate, :text)
+    params.require(:youte).permit(:user_id, :youte_genre_id, :report, :indicate, :text, :star)
   end
 
 end

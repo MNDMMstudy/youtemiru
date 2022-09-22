@@ -10,6 +10,6 @@ class User::CommentsController < ApplicationController
 
   private
   def comment_params
-    params.permit(:user_id, :genre_id, :youte_id, :report, :indicate, :text)
+    params.permit(:user_id, :genre_id, :youte_id, :report, :indicate, :text, :star)
   end
 end
