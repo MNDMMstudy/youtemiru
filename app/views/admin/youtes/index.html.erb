@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-7">
+    <div class="col-10 table mx-auto">
       <h2>みんなのYoute一覧</h2>
       <p>※最新順に並んでいます</p>
-      <table class="table table-hover table-inverse mt-5">
+      <table class="table-hover table-inverse mt-5">
         <thead>
           <tr>
             <th>みんなのYoute</th>
@@ -23,19 +23,19 @@
             <% end %>
           </td>
           <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= youte.youte_genre.name %></td>
+          <td><button type="button" class="btn btn-info"><%= youte.youte_genre.name %></button></td>
           <td>
             <% if youte.report == true %>
-              <p>通報</p>
+               <button type="button" class="btn btn-danger">通報</button>
             <% else %>
-              <p>通報されてない</p>
+              <button type="button" class="btn btn-success">通報されていない</button>
             <% end %>
           </td>
           <td>
             <% if youte.indicate == true %>
-              <p>表示中</p>
+             <button type="button" class="btn btn-success">表示中</button>
             <% else %>
-              <p>非表示中</p>
+              <button type="button" class="btn btn-danger">非表示</button>
             <% end %>
           </td>
          </tr>

@@ -1,23 +1,24 @@
 <div class="container">
   <div class="row">
-    <div class="col-7">
+    <div class="col-7 mx-auto">
       <div class="youte">
        <h2>Youte!</h2>
+       <h5>テキスト</h5>
        <p><%= @youtes.text %></p>
-       <h2>タグ</h2>
-       <p><%= @youtes.youte_genre.name %></p>
-       <h2>通報</h2>
+
+      <button type="button" class="btn btn-info"><%= @youtes.youte_genre.name %></button>
+       <h5>通報</h5>
        <% if @youtes.report == true %>
-        <p>通報</p>
+        <button type="button" class="btn btn-danger">通報</button>
        <% else %>
-        <p>通報されてない</p>
+        <button type="button" class="btn btn-success">通報されていない</button>
       <% end %>
-       <h2>表示</h2>
+       <h5>表示</h5>
       <% if @youtes.indicate == true %>
-        <p>表示中</p>
+        <button type="button" class="btn btn-success">表示中</button>
       <% else %>
-        <p>非表示中</p>
-      <% end %>
+        <button type="button" class="btn btn-danger">非表示</button>
+      <% end %></br>
       <%= link_to "削除", admin_youte_path(@youtes), method: :patch %>
     </div>
 
@@ -27,20 +28,23 @@
          <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
          <% @youtes.comments.each do |comment| %>
           <div>
+            <h5>テキスト</h5>
             <%= comment.text %></br>
-            <%= comment.comment_genre.name %></br>
+            <h5>タグ</h5>
+            <button type="button" class="btn btn-info"><%= comment.comment_genre.name %></button>
+            <h5>制作日</h5>
             <%= comment.created_at.strftime('%Y/%m/%d') %></br>
-            <h2>通報</h2>
+            <h5>通報</h5>
              <% if comment.report == true %>
-              <p>通報</p>
+              <button type="button" class="btn btn-danger">通報</button>
              <% else %>
-              <p>通報されてない</p>
+              <button type="button" class="btn btn-success">通報されていない</button>
             <% end %>
-             <h2>表示</h2>
+             <h5>表示</h5>
             <% if comment.indicate == true %>
-              <p>表示中</p>
+              <button type="button" class="btn btn-success">表示中</button>
             <% else %>
-              <p>非表示中</p>
+              <button type="button" class="btn btn-danger">非表示</button>
             <% end %>
             <%= link_to "削除", admin_comment_path(comment), method: :patch %>
           </div>

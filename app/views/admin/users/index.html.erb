@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-7">
+    <div class="col-10 table mx-auto">
       <h2>会員一覧</h2>
-      <table class="table table-hover table-inverse mt-5">
+      <table class="table-hover table-inverse mt-5">
         <thead>
           <tr>
             <th>名前</th>
@@ -24,11 +24,11 @@
           <td><%= user.youtes.where(report:true).count + user.comments.where(report:true).count %></td>
           <td>
             <% if user.status == 0 %>
-              <p>退職済み</p>
+              <button type="button" class="btn secondary">退職済み</button>
             <% elsif user.status == 1 %>
-              <p>制限なし</p>
+              <button type="button" class="btn btn-success">制限なし</button>
             <% else %>
-              <p>制限中</p>
+              <button type="button" class="btn btn-danger">制限中</button>
             <% end %>
           </td>
          </tr>
