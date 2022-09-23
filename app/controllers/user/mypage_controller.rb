@@ -1,4 +1,5 @@
 class User::MypageController < ApplicationController
+  before_action :authenticate_user!
   def index
     @youtes = Youte.where(user_id: current_user.id).order(created_at: :DESC)
     @youte = Youte.new

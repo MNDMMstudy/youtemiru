@@ -1,4 +1,5 @@
 class Admin::GenreYoutesController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @youte_genres = YouteGenre.all
     @youte_genre = YouteGenre.new

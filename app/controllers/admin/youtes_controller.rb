@@ -1,4 +1,5 @@
 class Admin::YoutesController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @youtes =Youte.all.order(created_at: :DESC)
   end

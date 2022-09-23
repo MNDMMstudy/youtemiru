@@ -7,4 +7,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :favorites
 
+  def active_for_authentication?
+    super && (status != 0)
+  end
 end

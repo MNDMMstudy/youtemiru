@@ -1,4 +1,5 @@
 class User::ReportCommentsController < ApplicationController
+  before_action :authenticate_user!
   def check
     @comment = Comment.find(params[:sent_comment_id])
   end

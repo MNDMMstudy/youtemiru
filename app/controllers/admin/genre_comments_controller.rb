@@ -1,4 +1,5 @@
 class Admin::GenreCommentsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @comment_genres = CommentGenre.all
     @comment_genre = CommentGenre.new

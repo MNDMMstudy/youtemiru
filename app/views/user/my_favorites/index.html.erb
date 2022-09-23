@@ -22,7 +22,7 @@
                 <% end %>
               </td>
               <td><%= favorite.comment.created_at.strftime('%Y/%m/%d') %></td>
-              <td><%= favorite.comment.comment_genre.name %></td>
+              <td><button type="button" class="btn btn-info"><%= favorite.comment.comment_genre.name %></button></td>
              </tr>
             <% end %>
           <% end %>

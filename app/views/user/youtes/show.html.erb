@@ -7,11 +7,11 @@
      <% if @youtes.indicate == true %>
       <div class="youte">
        <h2>Youte!</h2>
+       <h5>テキスト</h5>
        <p><%= @youtes.text %></p>
-
-       <h2>タグ</h2>
-       <p><%= @youtes.youte_genre.name %></p>
-      <h2>緊急度</h2>
+       <h5>タグ</h5>
+       <button type="button" class="btn btn-info"><%= @youtes.youte_genre.name %></button>
+      <h5>緊急度</h2>
       <div id="star-rate<%= @youtes.id%>"> </td>
        <script>
          $('#star-rate<%= @youtes.id %>').empty();
@@ -27,12 +27,12 @@
       </div>
 
         <% if @youtes.user == current_user %>
-         <%= link_to "削除", user_youte_path(@youtes), method: :patch %>
+         <%= link_to "削除", user_youte_path(@youtes), method: :patch,class:"btn btn-danger" %>
         <% else %>
          <% if @youtes.report == true %>
-          <p>通報済みです</p>
+           <button type="button" class="btn btn-secondary">通報済みです</button>
          <% else %>
-          <%= link_to "通報する", user_youte_reports_check_path(youte_id: @youtes) %>
+          <%= link_to "通報する", user_youte_reports_check_path(youte_id: @youtes),class:"btn btn-danger" %>
          <% end %>
         <% end %>
       </div>
@@ -44,8 +44,11 @@
          <% @youtes.comments.each do |comment| %>
           <div>
            <% if comment.indicate == true %>
+           <h5>テキスト</h5>
             <%= comment.text %></br>
-            <%= comment.comment_genre.name %></br>
+            <h5>タグ</h5>
+            <button type="button" class="btn btn-info"><%= comment.comment_genre.name %></button>
+            <h5>制作日</h5>
             <%= comment.created_at.strftime('%Y/%m/%d') %></br>
              <% if comment.favorited_by?(current_user) %>
               <p>
@@ -61,12 +64,12 @@
                </p>
              <% end %>
              <% if comment.user == current_user %>
-              <%= link_to "削除", user_youte_sent_comment_path(comment.youte, comment), method: :patch %>
+              <%= link_to "削除", user_youte_sent_comment_path(comment.youte, comment), method: :patch,class:"btn btn-danger" %>
              <% else %>
               <% if comment.report == true %>
-               <p>通報済みです</p>
+                <button type="button" class="btn btn-secondary">通報済みです</button>
               <% else %>
-               <%= link_to "通報する", user_youte_sent_comment_report_comments_check_path(youte_id: comment.youte_id, sent_comment_id: comment) %>
+               <%= link_to "通報する", user_youte_sent_comment_report_comments_check_path(youte_id: comment.youte_id, sent_comment_id: comment),class:"btn btn-danger" %>
               <% end %>
              <% end %>
              <% else %>
@@ -77,13 +80,17 @@
        </div>
 
        <div class="comment_create">
-        <%= form_with  url: user_youte_sent_comments_path(@youtes) do |f| %>
-         <label >Comment</label>
-         <%= f.text_field :text %>
-         <label>ジャンル</label>
-         <% f.text_field :genre_id, class:"form-control" %>
-         <%= f.select :genre_id, options_from_collection_for_select(CommentGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
-         <label class="col-4 mx-auto d-block"><%= f.submit 'コメントする', class:"btn btn-success" %></label>
+        <% if @user.status == 1 %>
+         <%= form_with  url: user_youte_sent_comments_path(@youtes) do |f| %>
+          <label >Comment</label>
+          <%= f.text_field :text %>
+          <label>ジャンル</label>
+          <% f.text_field :genre_id, class:"form-control" %>
+          <%= f.select :genre_id, options_from_collection_for_select(CommentGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
+          <label class="col-4 mx-auto d-block"><%= f.submit 'コメントする', class:"btn btn-success" %></label>
+         <% end %>
+         <% else %>
+          <p>制限中のため利用できません。</p>
         <% end %>
        </div>
       </div>

@@ -1,4 +1,5 @@
 class User::YoutesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @youtes =Youte.all.order(created_at: :DESC)
     @youte =Youte.new

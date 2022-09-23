@@ -1,4 +1,5 @@
 class User::ReportsController < ApplicationController
+  before_action :authenticate_user!
   def check
     @youte = Youte.find(params[:youte_id])
   end

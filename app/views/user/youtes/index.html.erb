@@ -14,6 +14,7 @@
             <th>みんなのYoute</th>
             <th>投稿日時</th>
             <th>タグ</th>
+            <th>緊急度</th>
           </tr>
         </thead>
 
@@ -27,7 +28,22 @@
               <% end %>
             </td>
             <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%= youte.youte_genre.name %></td>
+            <td><button type="button" class="btn btn-info"><%= youte.youte_genre.name %></button></td>
+            <td>
+              <div id="star-rate<%= youte.id%>"> </td>
+               <script>
+                 $('#star-rate<%= youte.id %>').empty();
+                 $('#star-rate<%= youte.id%>').raty({
+                   size      : 36,
+                   starOff   : '<%= asset_path('star-off.png') %>',
+                   starOn    : '<%= asset_path('star-on.png') %>',
+                   half      : false,
+                   readOnly: true,
+                   score: <%= youte.star.presence || 0 %>,
+                 });
+               </script>
+              </div>
+            </td>
            </tr>
            <% end %>
         <% end %>
