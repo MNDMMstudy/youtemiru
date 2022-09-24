@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
   end
 
   create_table "youtes", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "youte_genre_id", null: false
     t.boolean "report", default: false, null: false
     t.boolean "indicate", default: true, null: false
@@ -78,10 +78,8 @@ ActiveRecord::Schema.define(version: 2022_09_09_112838) do
     t.string "star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_youtes_on_user_id"
     t.index ["youte_genre_id"], name: "index_youtes_on_youte_genre_id"
   end
 
-  add_foreign_key "youtes", "users"
   add_foreign_key "youtes", "youte_genres"
 end
