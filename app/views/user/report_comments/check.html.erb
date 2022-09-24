@@ -1,0 +1,7 @@
+<p>通報しますか？</p>
+<div class='col-2'>
+  <%= link_to "通報しない", user_youte_path(id: @comment.youte_id), class: "btn btn-primary  form-control" %>
+</div>
+<div class='col-2'>
+  <%= link_to "通報する", user_youte_sent_comment_report_comments_update_path(youte_id: @comment.youte_id, sent_comment_id: @comment), method: :patch, class: "btn btn-danger form-control" %>
+</div>

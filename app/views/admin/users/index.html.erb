@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 table mx-auto">
+      <h2>会員一覧</h2>
+      <table class="table-hover table-inverse mt-5">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>メールアドレス</th>
+            <th>通報数</th>
+            <th>会員ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @users.each do |user| %>
+         <tr onclick='window.location="<%= admin_user_path(user.id) %>"' role="link">
+          <td>
+            <%=  link_to admin_user_path(user.id) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td><%= user.email %></td>
+          <td><%= user.youtes.where(report:true).count + user.comments.where(report:true).count %></td>
+          <td>
+            <% if user.status == 0 %>
+              <button type="button" class="btn secondary">退職済み</button>
+            <% elsif user.status == 1 %>
+              <button type="button" class="btn btn-success">制限なし</button>
+            <% else %>
+              <button type="button" class="btn btn-danger">制限中</button>
+            <% end %>
+          </td>
+         </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

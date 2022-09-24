@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="info">
+       <h2>ユーザー詳細</h2>
+       <h5>ユーザーネーム</h5>
+       <p><%= @user.name %></p>
+       <h5>メールアドレス</h5>
+       <p><%= @user.email %></p>
+       <h5>通報数</h5>
+        <p>Youte!:<%= @user.youtes.where(report:true).count %></p>
+        <p>コメント:<%= @user.comments.where(report:true).count %></p>
+       <h5>ユーザーステータス</h5>
+        <% if @user.status == 0 %>
+          <button type="button" class="btn secondary">退職済み</button>
+        <% elsif @user.status == 1 %>
+          <button type="button" class="btn btn-success">制限なし</button>
+        <% else %>
+          <button type="button" class="btn btn-danger">制限中</button>
+        <% end %>
+       <div class="change_status">
+         <%= form_with model: @user, url:admin_user_path do |f| %>
+          <label>ステータス変更</label>
+            <%= f.select :status, [["退職済み", "0"], ["制限なし", "1"], ["制限中", "2"]], include_blank: "--選択してください--" %>
+          <label class="col-4 mx-auto d-block"><%= f.submit '変更', class:"btn btn-success" %></label>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="table">
+        <h2>Youte一覧</h2>
+         <table class="table-hover table-inverse mt-5">
+          <thead>
+            <tr>
+              <th>Youte</th>
+              <th>投稿日時</th>
+              <th>タグ</th>
+              <th>通報</th>
+              <th>表示</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <%  @user.youtes.each do |youte| %>
+           <tr onclick='window.location="<%= admin_youte_path(youte.id) %>"' role="link">
+            <td>
+              <%=  link_to admin_youte_path(youte.id) do %>
+                <%= youte.text.truncate(10) %>
+              <% end %>
+            </td>
+            <td><%= youte.created_at.strftime('%Y/%m/%d') %></td>
+            <td><button type="button" class="btn btn-info"><%= youte.youte_genre.name %></button></td>
+            <td>
+              <% if youte.report == true %>
+               <button type="button" class="btn btn-danger">通報</button>
+              <% else %>
+                <button type="button" class="btn btn-success">通報されていない</button>
+              <% end %>
+            </td>
+            <td>
+             <% if youte.indicate == true %>
+               <button type="button" class="btn btn-success">表示中</button>
+              <% else %>
+                <button type="button" class="btn btn-danger">非表示</button>
+              <% end %>
+            </td>
+           </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </diV>
+      <div class="table">
+        <h2>コメント一覧</h2>
+        <table class="table-hover table-inverse mt-5">
+          <thead>
+            <tr>
+              <th>コメント</th>
+              <th>投稿日時</th>
+              <th>タグ</th>
+              <th>通報</th>
+              <th>表示</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <%  @user.comments.each do |comment| %>
+           <tr onclick='window.location="<%= admin_youte_path(comment.youte.id) %>"' role="link">
+            <td>
+              <%=  link_to admin_youte_path(comment.youte.id) do %>
+                <%= comment.text.truncate(10) %>
+              <% end %>
+            </td>
+            <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= comment.comment_genre.name %></td>
+            <td>
+              <% if comment.report == true %>
+                <p>通報</p>
+              <% else %>
+                <p>通報されてない</p>
+              <% end %>
+            </td>
+            <td>
+              <% if comment.indicate == true %>
+                <p>表示中</p>
+              <% else %>
+                <p>非表示中</p>
+              <% end %>
+            </td>
+           </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

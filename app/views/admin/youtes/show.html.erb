@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-7 mx-auto">
+      <div class="youte">
+       <h2>Youte!</h2>
+       <h5>テキスト</h5>
+       <p><%= @youtes.text %></p>
+
+      <button type="button" class="btn btn-info"><%= @youtes.youte_genre.name %></button>
+       <h5>通報</h5>
+       <% if @youtes.report == true %>
+        <button type="button" class="btn btn-danger">通報</button>
+       <% else %>
+        <button type="button" class="btn btn-success">通報されていない</button>
+      <% end %>
+       <h5>表示</h5>
+      <% if @youtes.indicate == true %>
+        <button type="button" class="btn btn-success">表示中</button>
+      <% else %>
+        <button type="button" class="btn btn-danger">非表示</button>
+      <% end %></br>
+      <%= link_to "削除", admin_youte_path(@youtes), method: :patch %>
+    </div>
+
+      <div class="comment">
+       <h2>コメント</h2>
+       <div class="comment_show">
+         <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
+         <% @youtes.comments.each do |comment| %>
+          <div>
+            <h5>テキスト</h5>
+            <%= comment.text %></br>
+            <h5>タグ</h5>
+            <button type="button" class="btn btn-info"><%= comment.comment_genre.name %></button>
+            <h5>制作日</h5>
+            <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+            <h5>通報</h5>
+             <% if comment.report == true %>
+              <button type="button" class="btn btn-danger">通報</button>
+             <% else %>
+              <button type="button" class="btn btn-success">通報されていない</button>
+            <% end %>
+             <h5>表示</h5>
+            <% if comment.indicate == true %>
+              <button type="button" class="btn btn-success">表示中</button>
+            <% else %>
+              <button type="button" class="btn btn-danger">非表示</button>
+            <% end %>
+            <%= link_to "削除", admin_comment_path(comment), method: :patch %>
+          </div>
+         <% end %>
+       </div>
+      </div>
+    </div>
+   </div>
+  </div>

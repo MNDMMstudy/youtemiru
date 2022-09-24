@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+     <%= render "user/mypage/mypage", youte: @youte, user: @user %>
+    </div>
+    <div class="col-7">
+     <% if @youtes.indicate == true %>
+      <div class="youte">
+       <h2>Youte!</h2>
+       <h5>テキスト</h5>
+       <p><%= @youtes.text %></p>
+       <h5>タグ</h5>
+       <button type="button" class="btn btn-info"><%= @youtes.youte_genre.name %></button>
+      <h5>緊急度</h2>
+      <div id="star-rate<%= @youtes.id%>"> </td>
+       <script>
+         $('#star-rate<%= @youtes.id %>').empty();
+         $('#star-rate<%= @youtes.id%>').raty({
+           size      : 36,
+           starOff   : '<%= asset_path('star-off.png') %>',
+           starOn    : '<%= asset_path('star-on.png') %>',
+           half      : false,
+           readOnly: true,
+           score: <%= @youtes.star.presence || 0 %>,
+         });
+       </script>
+      </div>
+
+        <% if @youtes.user == current_user %>
+         <%= link_to "削除", user_youte_path(@youtes), method: :patch,class:"btn btn-danger" %>
+        <% else %>
+         <% if @youtes.report == true %>
+           <button type="button" class="btn btn-secondary">通報済みです</button>
+         <% else %>
+          <%= link_to "通報する", user_youte_reports_check_path(youte_id: @youtes),class:"btn btn-danger" %>
+         <% end %>
+        <% end %>
+      </div>
+
+      <div class="comment">
+       <h2>コメント</h2>
+       <div class="comment_show">
+         <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
+         <% @youtes.comments.each do |comment| %>
+          <div>
+           <% if comment.indicate == true %>
+           <h5>テキスト</h5>
+            <%= comment.text %></br>
+            <h5>タグ</h5>
+            <button type="button" class="btn btn-info"><%= comment.comment_genre.name %></button>
+            <h5>制作日</h5>
+            <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+             <% if comment.favorited_by?(current_user) %>
+              <p>
+              <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :delete do %>
+               ★お気に入り済
+              <% end %>
+              </p>
+             <% else %>
+               <p>
+                <%= link_to  user_youte_sent_comment_favorites_path(comment.youte, comment), method: :post do %>
+                 ☆お気に入りする
+                <% end %>
+               </p>
+             <% end %>
+             <% if comment.user == current_user %>
+              <%= link_to "削除", user_youte_sent_comment_path(comment.youte, comment), method: :patch,class:"btn btn-danger" %>
+             <% else %>
+              <% if comment.report == true %>
+                <button type="button" class="btn btn-secondary">通報済みです</button>
+              <% else %>
+               <%= link_to "通報する", user_youte_sent_comment_report_comments_check_path(youte_id: comment.youte_id, sent_comment_id: comment),class:"btn btn-danger" %>
+              <% end %>
+             <% end %>
+             <% else %>
+             <h2>このコメントは削除されました。</h2>
+           <% end %>
+          </div>
+         <% end %>
+       </div>
+
+       <div class="comment_create">
+        <% if @user.status == 1 %>
+         <%= form_with  url: user_youte_sent_comments_path(@youtes) do |f| %>
+          <label >Comment</label>
+          <%= f.text_field :text %>
+          <label>ジャンル</label>
+          <% f.text_field :genre_id, class:"form-control" %>
+          <%= f.select :genre_id, options_from_collection_for_select(CommentGenre.all, :id, :name_was), include_blank: "--選択してください--" %>
+          <label class="col-4 mx-auto d-block"><%= f.submit 'コメントする', class:"btn btn-success" %></label>
+         <% end %>
+         <% else %>
+          <p>制限中のため利用できません。</p>
+        <% end %>
+       </div>
+      </div>
+     <% else %>
+      <h2>このYouteは削除されました。</h2>
+     <% end %>
+    </div>
+   </div>
+  </div>

@@ -13,3 +13,44 @@
  *= require_tree .
  *= require_self
  */
+
+ body{
+  background-color: #f8f8ff;
+}
+
+.table{
+ margin: 30px;
+ padding: 10px;
+ border: 5px solid #dcdcdc;
+ background-color: #e0ffff;
+}
+
+table{
+ background-color: #f0f8ff;
+}
+
+ .youte {
+  margin: 30px;
+  padding: 10px;
+  border: 5px solid #dcdcdc;
+  background-color: #e0ffff;
+}
+
+.comment{
+  margin: 30px;
+  padding: 10px;
+  border: 5px solid #dcdcdc;
+  background-color: #e0ffff;
+}
+
+.text{
+  margin: 30px;
+  background-color: #e0ffff;
+}
+
+.info{
+  margin: 30px;
+  padding: 10px;
+  border: 5px solid #dcdcdc;
+  background-color: #e0ffff;
+}

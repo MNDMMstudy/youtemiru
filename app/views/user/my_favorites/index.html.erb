@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+     <%= render "user/mypage/mypage", youte: @youte, user: current_user %>
+    </div>
+    <div class="col-7">
+      <table class="table table-hover table-inverse mt-5">
+        <thead>
+          <tr>
+            <th>お気に入りのコメント</th>
+            <th>投稿日時</th>
+            <th>タグ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @favorites.each do |favorite| %>
+            <% if favorite.comment.indicate == true %>
+             <tr onclick='window.location="<%= user_youte_path(id: favorite.comment.youte_id) %>"' role="link">
+              <td>
+                <%=  link_to user_youte_path(id: favorite.comment.youte_id) do %>
+                  <%= favorite.comment.text.truncate(10) %>
+                <% end %>
+              </td>
+              <td><%= favorite.comment.created_at.strftime('%Y/%m/%d') %></td>
+              <td><button type="button" class="btn btn-info"><%= favorite.comment.comment_genre.name %></button></td>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+       </table>
+    </div>
+  </div>
+</div>
