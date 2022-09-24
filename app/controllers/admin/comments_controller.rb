@@ -14,6 +14,7 @@ class Admin::CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @comment.update(indicate: false)
+    flash[:notice] = "コメントの削除が完了しました"
     redirect_to admin_youte_path(@comment.youte)
   end
 

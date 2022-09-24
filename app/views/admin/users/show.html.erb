@@ -12,7 +12,7 @@
         <p>コメント:<%= @user.comments.where(report:true).count %></p>
        <h5>ユーザーステータス</h5>
         <% if @user.status == 0 %>
-          <button type="button" class="btn secondary">退職済み</button>
+          <button type="button" class="btn btn-secondary">退職済み</button>
         <% elsif @user.status == 1 %>
           <button type="button" class="btn btn-success">制限なし</button>
         <% else %>

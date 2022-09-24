@@ -14,6 +14,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    flash[:notice] = "ユーザーステータスの変更が完了しました"
     redirect_to admin_user_path(@user)
   end
 

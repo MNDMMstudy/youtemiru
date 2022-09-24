@@ -27,7 +27,7 @@
        <div class="comment_show">
          <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
          <% @youtes.comments.each do |comment| %>
-          <div>
+          <div class="table">
             <h5>テキスト</h5>
             <%= comment.text %></br>
             <h5>タグ</h5>
