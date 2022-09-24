@@ -6,7 +6,7 @@ class User::CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @comment.update(indicate: false)
-    redirect_to admin_youte_path(@comment.youte)
+    redirect_to user_youte_path(@comment.youte)
   end
 
   private
