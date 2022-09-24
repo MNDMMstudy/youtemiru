@@ -22,12 +22,12 @@
       <%= link_to "削除", admin_youte_path(@youtes), method: :patch %>
     </div>
 
-      <div class="comments">
+      <div class="comment">
        <h2>コメント</h2>
        <div class="comment_show">
          <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
          <% @youtes.comments.each do |comment| %>
-          <div class="table">
+          <div class="comments">
             <h5>テキスト</h5>
             <%= comment.text %></br>
             <h5>タグ</h5>
