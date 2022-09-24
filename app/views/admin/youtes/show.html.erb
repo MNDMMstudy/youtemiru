@@ -22,7 +22,7 @@
       <%= link_to "削除", admin_youte_path(@youtes), method: :patch %>
     </div>
 
-      <div class="comment">
+      <div class="comments">
        <h2>コメント</h2>
        <div class="comment_show">
          <p>コメント件数：<%= @youtes.comments.where(indicate:true).count %></p>
