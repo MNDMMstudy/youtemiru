@@ -42,7 +42,7 @@ class User::YoutesController < ApplicationController
     @youte = Youte.find(params[:id])
     @youte.update(indicate: false)
     flash[:notice] = "Youteの削除が完了しました"
-    redirect_to user_mypage_index
+    redirect_to user_mypage_index_path
   end
 
   def report
