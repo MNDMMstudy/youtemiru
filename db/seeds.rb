@@ -5,6 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+users = User.all
+youte_genres = YouteGenre.all
+comment_genres = CommentGenre.all
+youtes = Youte.all
+comments = Comment.all
+
 Admin.create!(
   email: 'admin@test.com',
   password: 'password'
@@ -32,10 +39,6 @@ CommentGenre.create!(
   ]
 )
 
-users = User.all
-youte_genres = YouteGenre.all
-comment_genres = CommentGenre.all
-youtes = Youte.all
 
 Youte.create!(
   [
@@ -53,3 +56,13 @@ Comment.create!(
     {text: 'お仕事も頑張って、お弁当作ってえらい！', youte_id: youtes[2].id, genre_id: comment_genres[0].id, user_id: users[0].id  }
   ]
 )
+
+Favorite.create!(
+  [
+    {user_id: users[0].id, comment_id: comments[0].id},
+    {user_id: users[1].id, comment_id: comments[1].id},
+    {user_id: users[1].id, comment_id: comments[2].id},
+    {user_id: users[2].id, comment_id: comments[3].id }
+  ]
+)
+
