@@ -3,7 +3,7 @@
      <%= form_with model: youte, url:user_youtes_path do |f| %>
       <label >Youte!</label>
         <%= f.text_field :text %></br>
-      <label>ジャンル</label>
+      <label>タグ</label>
         <%= f.select :youte_genre_id, options_from_collection_for_select(YouteGenre.all, :id, :name_was), include_blank: "--選択してください--" %></br>
       <label>緊急度</label>
       <div class="form-group row" id="star">
